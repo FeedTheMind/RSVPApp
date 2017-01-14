@@ -1,3 +1,5 @@
+// Allow user to modify misspellings, etc.
+
 const form = document.querySelector('#registrar');
 const input = form.querySelector('input');
 const ul = document.querySelector('#invitedList');
