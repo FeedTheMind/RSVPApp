@@ -1,8 +1,18 @@
-// Allow user to modify misspellings, etc.
-
 const form = document.querySelector('#registrar');
 const input = form.querySelector('input');
+
+const mainDiv = document.querySelector('.main');
 const ul = document.querySelector('#invitedList');
+
+const div = document.createElement('div');
+const filterLabel = document.createElement('label');
+const filterCheckBox = document.createElement('input');
+
+filterLabel.textContent = 'Hide those who have yet to respond.';
+filterCheckBox.type = 'checkbox';
+div.appendChild(filterLabel);
+div.appendChild(filterCheckBox);
+mainDiv.insertBefore(div, ul);
 
 function createLI(text) {
   const li = document.createElement('li');
@@ -85,7 +95,7 @@ ul.addEventListener('click', (e) => {
     } else if (button.textContent === 'Save') {
       const input = li.firstElementChild;
       const span = document.createElement('span');
-      
+
       span.textContent = input.value;
       li.insertBefore(span, input)
       li.removeChild(input);
