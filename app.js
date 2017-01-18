@@ -103,28 +103,39 @@ ul.addEventListener('click', (e) => {
     const button = e.target;
     const li = button.parentNode;
     const ul = li.parentNode;
+    const nameActions = {
+      remove: () => {
+        ul.removeChild(li);
+      },
+      edit: () => {
+        const span = li.firstElementChild;
+        const input = document.createElement('input');
+
+        input.type = 'text';
+        input.value = span.textContent;
+        li.insertBefore(input, span);
+        li.removeChild(span);
+        button.textContent = 'Save';
+
+        input.focus();
+      },
+      save: () => {
+        const input = li.firstElementChild;
+        const span = document.createElement('span');
+
+        span.textContent = input.value;
+        li.insertBefore(span, input)
+        li.removeChild(input);
+        button.textContent = 'Edit';
+      }
+    };
 
     if (button.textContent === 'Remove') {
-      ul.removeChild(li);
+      nameActions.remove();
     } else if (button.textContent === 'Edit') {
-      const span = li.firstElementChild;
-      const input = document.createElement('input');
-
-      input.type = 'text';
-      input.value = span.textContent;
-      li.insertBefore(input, span);
-      li.removeChild(span);
-      button.textContent = 'Save';
-
-      input.focus();
+      nameActions.edit();
     } else if (button.textContent === 'Save') {
-      const input = li.firstElementChild;
-      const span = document.createElement('span');
-
-      span.textContent = input.value;
-      li.insertBefore(span, input)
-      li.removeChild(input);
-      button.textContent = 'Edit';
+      nameActions.save();
     }
   }
 });
