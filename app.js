@@ -103,11 +103,13 @@ ul.addEventListener('click', (e) => {
     const button = e.target;
     const li = button.parentNode;
     const ul = li.parentNode;
+    const action = button.textContent;
+    console.log(action);
     const nameActions = {
-      remove: () => {
+      Remove: () => {
         ul.removeChild(li);
       },
-      edit: () => {
+      Edit: () => {
         const span = li.firstElementChild;
         const input = document.createElement('input');
 
@@ -119,7 +121,7 @@ ul.addEventListener('click', (e) => {
 
         input.focus();
       },
-      save: () => {
+      Save: () => {
         const input = li.firstElementChild;
         const span = document.createElement('span');
 
@@ -129,14 +131,8 @@ ul.addEventListener('click', (e) => {
         button.textContent = 'Edit';
       }
     };
-
-    if (button.textContent === 'Remove') {
-      nameActions.remove();
-    } else if (button.textContent === 'Edit') {
-      nameActions.edit();
-    } else if (button.textContent === 'Save') {
-      nameActions.save();
-    }
+    // Bypasses if conditions, using action value with bracket, not dot, syntax
+    nameActions[action]();
   }
 });
 
